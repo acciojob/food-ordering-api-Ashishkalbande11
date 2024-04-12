@@ -16,6 +16,11 @@ public class FoodController {
 
     public FoodController() {
     	// your code goes here
+        menu = new Menu();
+        menu.addMenuItem(new Food(1, "Burger", 10));
+        menu.addMenuItem(new Food(2, "Samosa", 15));
+        menu.addMenuItem(new Food(3, "Pasta", 12));
+
     }
 
     @GetMapping("/menu")
@@ -27,6 +32,11 @@ public class FoodController {
     @PostMapping("/order/{itemId}")
     public void placeOrder(@PathVariable int itemId) {
     	// your code goes here
+        Food food = menu.getMenuItemById(itemId);
+        if(food != null){
+            currentOrder.addItem(food);
+        }
+
     }
 
     @GetMapping("/order")
